@@ -1,0 +1,21 @@
+## Backup of %TIMESTAMP% -*- Mode: HCL; -*-
+
+resource "aws_ami_from_instance" "backup_%TIMESTAMP%" {
+  # name               = "Snapshot_${aws_instance.main.id}_%TIMESTAMP%"
+  source_instance_id = "${aws_instance.main.id}"
+
+  tags {
+    # Name      = "${var.ProjectName}"
+    Project   = "${var.ProjectName}"
+    Terraform = "true"
+
+    Instance  = "${aws_instance.main.id}"
+    TimeStamp = "%TIMESTAMP%"
+    Type      = "SnapShot"
+  }
+
+  lifecycle {
+    create_before_destroy = true
+    prevent_destroy       = true
+  }
+}

@@ -22,3 +22,5 @@
 ### * Python
 *.pyc
 
+### * repository
+backup_*.tf
